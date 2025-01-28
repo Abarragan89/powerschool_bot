@@ -6,7 +6,7 @@ __pycache__/
 .venv/
 
 # Ignore dynamically generated or sensitive files
-class_roster.txt
+*.txt
 
 # Optional: Ignore environment variable files (if you have one)
 .env
