@@ -1,0 +1,12 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore virtual environments
+.venv/
+
+# Ignore dynamically generated or sensitive files
+class_roster.txt
+
+# Optional: Ignore environment variable files (if you have one)
+.env
