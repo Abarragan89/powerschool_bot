@@ -16,8 +16,8 @@ chrome_options.add_experimental_option("detach", True)
 PASSWORD = os.getenv("PASSWORD")
 USERNAME = os.getenv("USERNAME")
 
-tardy_students = ['Arguello, Saray Alexandra']
-absent_students = ['Becerra, Dario Jesus']
+tardy_students = ['Hernandez Sandoval, Kevin Mauricio']
+absent_students = ['']
 
 
 def take_attendance():
