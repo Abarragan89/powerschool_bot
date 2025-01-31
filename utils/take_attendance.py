@@ -42,7 +42,13 @@ def take_attendance(tardies, absences):
         student_name = student_row.find_element(By.CLASS_NAME, value='cvDemarcation').text
         
         # need to click on this input first to show the select
-        student_row.find_element(By.CLASS_NAME, value='left').find_element(By.TAG_NAME, value='input').click()
+        input_field = student_row.find_element(By.CLASS_NAME, value='left').find_element(By.TAG_NAME, value='input')
+
+        # if not found, attendance is already set and saved, no input button visible
+        if not input_field:
+            continue
+        else:
+            input_field.click()
 
         # I need to wait until select is there
         drop_down = WebDriverWait(student_row, 10).until(

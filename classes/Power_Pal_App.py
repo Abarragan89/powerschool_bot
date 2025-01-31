@@ -7,9 +7,9 @@ class Power_Pal_App(Tk):
     def __init__(self):
         super().__init__()
         self.title("Power Pal")
-        self.geometry("500x400")
-        self.maxsize(500, 400)
-        self.minsize(400, 300)  
+        self.geometry("600x500")
+        self.maxsize(700, 600)
+        self.minsize(600, 500)  
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 
