@@ -1,5 +1,7 @@
 from tkinter import *
-from classes.Welcome_Frame import Welcome_Frame
+from classes.frames.Welcome_Frame import Welcome_Frame
+from classes.frames.Dashboard import Dashboard
+from classes.frames.Take_Attendance import Take_Attendance
 
 class Power_Pal_App(Tk):
     def __init__(self):
@@ -14,21 +16,32 @@ class Power_Pal_App(Tk):
         # Dictionary to hold frame instances
         self.frames = {}
 
-        for F in (Welcome_Frame,):
+        for F in (Welcome_Frame, Dashboard, Take_Attendance):
             # Get name of class
-            frame_name = F.__name__
-            frame = F(parent=self)
-            self.frames[frame_name] = frame
-            frame.grid(sticky="nsew")
+            frame = F(self)  # `self` is PowerPalApp
+            self.frames[F.__name__] = frame
+            frame.grid(row=0, column=0, sticky="nsew")
             for col in range(12):
                 frame.columnconfigure(col, weight=1)
         
-        def show_frame(self, frame_name):
-            # Hide all frames
-            for frames in self.frames.values():
-                frame.grid_forget()
-            
-            # Show the selected frame
-            frame = self.frames[frame_name]
-            frame.grid(sticky="nsew")
+
+        self.choose_opening_frame()
+        
+    def show_frame(self, frame_name):
+        """Show a frame for a given name."""
+        frame = self.frames[frame_name]
+        frame.tkraise()
+    
+    def choose_opening_frame(self):
+        """Check crendentials.txt see if present to load welcome or dashboard"""
+        try:
+            with open('data/credentials.txt') as file:
+                file_lines = file.readlines()
+                if len(file_lines) == 2:
+                    self.show_frame('Dashboard')
+                else:
+                    self.show_frame('Welcome_Frame')
+        except:
+            self.show_frame('Welcome_Frame')
+        
         

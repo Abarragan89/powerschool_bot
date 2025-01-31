@@ -1,11 +1,10 @@
-import tkinter as tk
 from tkinter import ttk
-from utils.create_class import create_class
+from utils.init_classroom import initialize_create_class
 
 class Welcome_Frame(ttk.Frame):
-    def __init__(self, parent):
+    def __init__(self, root_app):
         # initi the Frame Class 
-        super().__init__(parent, padding=10)
+        super().__init__(root_app)
 
         # Set frame to grid and stretch it across the parent
         self.grid(sticky="nsew") 
@@ -14,12 +13,12 @@ class Welcome_Frame(ttk.Frame):
         for col in range(12):
             self.columnconfigure(col, weight=1)
         
-        # Welcome Text
-        welcome_text = tk.Label(self, text="Welcome to Power Pal!", font=("Helvetica", 24))
+        # Welcome Title
+        welcome_text = ttk.Label(self, text="Welcome to Power Pal!", font=("Helvetica", 24))
         welcome_text.grid(column=0, row=0, columnspan=12, pady=10)
 
         # Instructions Text
-        instructions_text = tk.Label(
+        instructions_text = ttk.Label(
             self, 
             text="Please provide your PowerSchool username and password. We will only ask for this once and only save it locally on your computer.", 
             wraplength=420,  # Set the maximum width for wrapping
@@ -44,9 +43,6 @@ class Welcome_Frame(ttk.Frame):
         initialize_btn = ttk.Button(
             self, 
             text="Initialize", 
-            command=self.initialize_action(create_class)
+            command=lambda: initialize_create_class(self.username.get(), self.password.get(), root_app)
         )
         initialize_btn.grid(column=0, row=4, columnspan=12, pady=(20, 0))
-
-    def initialize_action(self, create_class):
-        return lambda: create_class(self.username.get(), self.password.get())

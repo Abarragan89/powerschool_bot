@@ -3,24 +3,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.select import Select
-from dotenv import load_dotenv
-import os
-import time 
+from utils.cryption import load_and_decrypt_credentials
+import time
 
-load_dotenv()
+def take_attendance(tardies, absences):
+    # Get user credentials
+    USERNAME, PASSWORD = load_and_decrypt_credentials()
 
-# Keep Chrome Browser open after program finishes
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option("detach", True)
+    # Keep Chrome Browser open after program finishes
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("detach", True)
 
-PASSWORD = os.getenv("PASSWORD")
-USERNAME = os.getenv("USERNAME")
-
-tardy_students = ['Hernandez Sandoval, Kevin Mauricio']
-absent_students = ['']
-
-
-def take_attendance():
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://villagecharter.powerschool.com/teachers/pw.html")
 
@@ -47,8 +40,10 @@ def take_attendance():
 
     for student_row in student_rows:
         student_name = student_row.find_element(By.CLASS_NAME, value='cvDemarcation').text
+        
         # need to click on this input first to show the select
-        initial_input = student_row.find_element(By.CLASS_NAME, value='left').find_element(By.TAG_NAME, value='input').click()
+        student_row.find_element(By.CLASS_NAME, value='left').find_element(By.TAG_NAME, value='input').click()
+
         # I need to wait until select is there
         drop_down = WebDriverWait(student_row, 10).until(
             EC.presence_of_element_located((By.TAG_NAME, 'select'))
@@ -56,10 +51,10 @@ def take_attendance():
         # Create drop_down
         drop_down = Select(drop_down)
 
-        if student_name in tardy_students:
+        if student_name in tardies:
             # select tardy
             drop_down.select_by_value('T')
-        elif student_name in absent_students:
+        elif student_name in absences:
             drop_down.select_by_value('UA')
         else:
             drop_down.select_by_value('P')

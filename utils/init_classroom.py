@@ -2,14 +2,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from dotenv import load_dotenv
+from utils.cryption import get_key, encrypt_and_save_credentials
 
-load_dotenv()
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_experimental_option("detach", True)
+def initialize_create_class(username, password, controller):
+    """Save & encrypt credentials and initialize class"""
+    if not username or not password:
+        return
 
-def create_class(username, password):
+    encrypt_and_save_credentials(username, password)
+
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_experimental_option("detach", True)
+
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://villagecharter.powerschool.com/teachers/pw.html")
 
@@ -43,8 +48,5 @@ def create_class(username, password):
                 file.write(f"{student_name}")
             else:
                 file.write(f"{student_name}\n")
-
-    # encrypt and save user credentials
-    with open('data/credentials.txt', 'w') as file:
-        file.write(f"{username}\n{password}")
     driver.quit()
+    controller.show_frame("Dashboard")
