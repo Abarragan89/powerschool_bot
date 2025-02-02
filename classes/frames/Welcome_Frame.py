@@ -4,7 +4,7 @@ from utils.init_classroom import initialize_create_class
 class Welcome_Frame(ttk.Frame):
     def __init__(self, root_app):
         # initi the Frame Class 
-        super().__init__()
+        super().__init__(padding=10)
 
         # Set frame to grid and stretch it across the parent
         self.grid(sticky="nsew") 

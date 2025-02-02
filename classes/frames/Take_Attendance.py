@@ -5,7 +5,7 @@ from utils.take_attendance import take_attendance
 
 class Take_Attendance(ttk.Frame):
     def __init__(self, root_app):
-        super().__init__()
+        super().__init__(padding=10)
 
         # Set frame to grid and stretch it across the parent
         self.grid(sticky="nsew") 
@@ -28,48 +28,52 @@ class Take_Attendance(ttk.Frame):
 
         # Attendance Title
         self.frame_title = ttk.Label(self, text="Take Attendance", font=("Helvetica", 22))
-        self.frame_title.grid(column=0, row=0, columnspan=12, pady=5)
+        self.frame_title.grid(column=0, row=0, columnspan=12, pady=(0, 20))
         
         # ListBoxes Labels 
-        tardy_label = tk.Label(self, text='Tardy', font=('Helvetica', 15), justify="center")
-        tardy_label.grid(row=1, column=0, columnspan=6)
-        absent_label = tk.Label(self, text='Absent', font=('Helvetica', 15), justify="center")
-        absent_label.grid(row=1, column=6, columnspan=6)
+        tardy_label = tk.Label(self, text='Tardy', font=('Helvetica', 16), justify="center")
+        tardy_label.grid(row=1, column=0, columnspan=6, pady=(0, 3))
+        absent_label = tk.Label(self, text='Absent', font=('Helvetica', 16), justify="center")
+        absent_label.grid(row=1, column=7, columnspan=6, pady=(0, 3))
 
         # Tardy Listbox
         self.tardy_listbox = tk.Listbox(
             self, 
             selectmode=tk.MULTIPLE, 
-            height=15, 
-            width=18, 
+            height=22, 
+            width=22, 
             font=('Helvetica', 14), 
             exportselection=False
         )
-        self.tardy_listbox.grid(row=2, column=0, columnspan=6)
+        self.tardy_listbox.grid(row=2, column=0, columnspan=5, rowspan=5)
         self.tardy_listbox.bind("<<ListboxSelect>>", self.on_tardy_select)
         
         # Absent Listbox
         self.absent_listbox = tk.Listbox(
             self, 
             selectmode=tk.MULTIPLE, 
-            height=15, 
-            width=18,  
+            height=22, 
+            width=22,  
             font=('Helvetica', 14), 
             exportselection=False
         )
-        self.absent_listbox.grid(row=2, column=6, columnspan=6)
+        self.absent_listbox.grid(row=2, column=7, columnspan=5, rowspan=5)
         self.absent_listbox.bind("<<ListboxSelect>>", self.on_absent_select)
 
         # Populate the listbox with the full roster
         self.populate_listboxes()
 
+        # Back to Dashbord Btn
+        back_to_dashboard = ttk.Button(self, text='Back', command=lambda: root_app.show_frame('Dashboard'), width=4)
+        back_to_dashboard.grid(row=0, column=0)
+        
         # Take Attendance Btn
         take_attendance_btn = ttk.Button(self, text='Submit Attendance', command=self.submit_attendance)
-        take_attendance_btn.grid(row=4, column=6)
+        take_attendance_btn.grid(row=2, column=6, sticky='s', rowspan=2)
 
-        # Back to Dashbord Btn
-        back_to_dashboard = ttk.Button(self, text='Dashboard', command=lambda: root_app.show_frame('Dashboard'))
-        back_to_dashboard.grid(row=4, column=0)
+        # Clear Btn
+        clear_selection_btn = ttk.Button(self, text='Clear', command=self.clear_selection, width=4)
+        clear_selection_btn.grid(row=3, column=6, rowspan=2, sticky='s')
     
     def populate_listboxes(self):
         for student in self.student_roster:
@@ -146,11 +150,23 @@ class Take_Attendance(ttk.Frame):
                 self.tardy_listbox.itemconfig(num, fg="white")
                 if f"tardy_{student}" in self.disabled_items:  # Check before removing
                     self.disabled_items.remove(f"tardy_{student}")
-
     
+    def clear_selection(self):
+        for index in range(len(self.student_roster)):
+            # Clear selections in both listboxes
+            self.tardy_listbox.select_clear(index)
+            self.absent_listbox.select_clear(index)
+            # Clear the UI dimmed items
+            self.tardy_listbox.itemconfig(index, fg="white")
+            self.absent_listbox.itemconfig(index, fg="white")
+            # Clear the list of Absent and Tardy students
+            self.absent_students = []
+            self.tardy_students = []
+            # Clear the disabled items set
+            self.disabled_items.clear()
+
     def submit_attendance(self):
         # take_attendance(self.tardy_students, self.absent_students)
-        print(f"tardy students", self.tardy_students)
-        print(f"absent students", self.absent_students)
-        print(f"disabled items ", self.disabled_items)
-
+        self.clear_selection()
+        print('absent students: ', self.absent_students)
+        print('tardy students: ', self.tardy_students)
