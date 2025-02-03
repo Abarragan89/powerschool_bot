@@ -166,7 +166,4 @@ class Take_Attendance(ttk.Frame):
             self.disabled_items.clear()
 
     def submit_attendance(self):
-        # take_attendance(self.tardy_students, self.absent_students)
-        self.clear_selection()
-        print('absent students: ', self.absent_students)
-        print('tardy students: ', self.tardy_students)
+        take_attendance(self.tardy_students, self.absent_students)

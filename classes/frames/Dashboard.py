@@ -2,6 +2,7 @@ from tkinter import ttk
 from tkcalendar import Calendar
 from utils.get_student_demographics import get_student_demographics
 
+
 class Dashboard(ttk.Frame):
     def __init__(self, root_app):
         # initi the Frame Class 
