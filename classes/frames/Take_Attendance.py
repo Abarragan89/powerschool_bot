@@ -1,6 +1,6 @@
 from tkinter import ttk
 import tkinter as tk
-from utils.get_students import get_student_list, first_name_last_initial
+from utils.string_manipulations import get_student_list, first_name_last_initial
 from utils.take_attendance import take_attendance
 
 class Take_Attendance(ttk.Frame):
@@ -28,7 +28,7 @@ class Take_Attendance(ttk.Frame):
 
         # Attendance Title
         self.frame_title = ttk.Label(self, text="Take Attendance", font=("Helvetica", 22))
-        self.frame_title.grid(column=0, row=0, columnspan=12, pady=(0, 20))
+        self.frame_title.grid(column=0, row=0, columnspan=12, pady=(0, 10))
         
         # ListBoxes Labels 
         tardy_label = tk.Label(self, text='Tardy', font=('Helvetica', 16), justify="center")
@@ -65,7 +65,7 @@ class Take_Attendance(ttk.Frame):
 
         # Back to Dashbord Btn
         back_to_dashboard = ttk.Button(self, text='Back', command=lambda: root_app.show_frame('Dashboard'), width=4)
-        back_to_dashboard.grid(row=0, column=0)
+        back_to_dashboard.grid(row=0, column=0, sticky='wn')
         
         # Take Attendance Btn
         take_attendance_btn = ttk.Button(self, text='Submit Attendance', command=self.submit_attendance)
@@ -92,7 +92,6 @@ class Take_Attendance(ttk.Frame):
         if len(current_student) > 0:
             current_student = current_student.pop()
             if f"tardy_{current_student}" in self.disabled_items:
-                print('made a match.com')
                 student_index = self.student_roster.index(current_student)
                 self.tardy_listbox.selection_clear(student_index)
                 return

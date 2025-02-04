@@ -25,7 +25,15 @@ class Dashboard(ttk.Frame):
             text="Take Attendance", 
             command=lambda: root_app.show_frame('Take_Attendance')
         )
-        go_to_attendance_btn.grid(column=0, row=4, columnspan=12, pady=(20, 0))
+        go_to_attendance_btn.grid(column=0, row=1, columnspan=5, pady=(20, 0))
+        
+        # Documents Link
+        go_to_documents_btn = ttk.Button(
+            self, 
+            text="Documents", 
+            command=lambda: root_app.show_frame('Documents')
+        )
+        go_to_documents_btn.grid(column=6, row=1, columnspan=12, pady=(20, 0))
 
         # Update Student Demographics
         update_student_demographics = ttk.Button(
@@ -33,8 +41,5 @@ class Dashboard(ttk.Frame):
             text="Update Student Demographics", 
             command=get_student_demographics
         )
-        update_student_demographics.grid(column=0, row=5, columnspan=12)
 
-        # Calendar 
-        # cal = Calendar(self, width=20, background="white", foreground="black")
-        # cal.grid()
+        update_student_demographics.grid(column=0, row=2, columnspan=12, pady=(30,0))

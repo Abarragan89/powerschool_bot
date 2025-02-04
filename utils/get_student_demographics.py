@@ -107,9 +107,7 @@ def get_student_demographics():
 
         # only get second contact if it exists
         contact_two_accordion = safe_find_element(driver, By.ID, 'student-contacts-accordion-1')
-        
-        print('contact_two_accordion', contact_two_accordion)
-
+    
         if contact_two_accordion:
             contact_two_accordion.find_element(By.CLASS_NAME, "accordion-toggle").click()
             student_data['contact_two'] = {

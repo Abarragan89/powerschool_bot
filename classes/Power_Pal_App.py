@@ -2,6 +2,7 @@ from tkinter import *
 from classes.frames.Welcome_Frame import Welcome_Frame
 from classes.frames.Dashboard import Dashboard
 from classes.frames.Take_Attendance import Take_Attendance
+from classes.frames.Documents import Documents
 
 class Power_Pal_App(Tk):
     def __init__(self):
@@ -15,7 +16,7 @@ class Power_Pal_App(Tk):
         # Dictionary to hold frame instances
         self.frames = {}
 
-        for F in (Welcome_Frame, Dashboard, Take_Attendance):
+        for F in (Welcome_Frame, Dashboard, Take_Attendance, Documents):
             # Get name of class
             frame = F(self)  # `self` is PowerPalApp
             self.frames[F.__name__] = frame
