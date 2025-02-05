@@ -88,6 +88,7 @@ def get_student_demographics():
             "city": safe_find_element_value(student_demo_div, By.ID, 'demo_student_address_city'),
             "state": safe_find_element_value(student_demo_div, By.ID, 'demo_student_address_state'),
             "zip": safe_find_element_value(student_demo_div, By.ID, 'demo_student_address_zip'),
+            "phone": safe_find_element_value(student_demo_div, By.ID, 'demo_student_phone'),
             "contact_one": {},
             "contact_two": {}
         }

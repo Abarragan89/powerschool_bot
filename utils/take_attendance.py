@@ -69,7 +69,7 @@ def take_attendance(tardies, absences):
             drop_down.select_by_value('P')
 
     confirm_attendance = driver.find_element(By.ID, value='btnSubmit')
-    # confirm_attendance.click()
+    confirm_attendance.click()
 
     time.sleep(5)
 

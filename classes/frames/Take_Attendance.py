@@ -36,18 +36,6 @@ class Take_Attendance(ttk.Frame):
         absent_label = tk.Label(self, text='Absent', font=('Helvetica', 16), justify="center")
         absent_label.grid(row=1, column=7, columnspan=6, pady=(0, 3))
 
-        # Tardy Listbox
-        self.tardy_listbox = tk.Listbox(
-            self, 
-            selectmode=tk.MULTIPLE, 
-            height=22, 
-            width=22, 
-            font=('Helvetica', 14), 
-            exportselection=False
-        )
-        self.tardy_listbox.grid(row=2, column=0, columnspan=5, rowspan=5)
-        self.tardy_listbox.bind("<<ListboxSelect>>", self.on_tardy_select)
-        
         # Absent Listbox
         self.absent_listbox = tk.Listbox(
             self, 
@@ -57,9 +45,21 @@ class Take_Attendance(ttk.Frame):
             font=('Helvetica', 14), 
             exportselection=False
         )
-        self.absent_listbox.grid(row=2, column=7, columnspan=5, rowspan=5)
+        self.absent_listbox.grid(row=2, column=0, columnspan=5, rowspan=5)
         self.absent_listbox.bind("<<ListboxSelect>>", self.on_absent_select)
 
+        # Tardy Listbox
+        self.tardy_listbox = tk.Listbox(
+            self, 
+            selectmode=tk.MULTIPLE, 
+            height=22, 
+            width=22, 
+            font=('Helvetica', 14), 
+            exportselection=False
+        )
+        self.tardy_listbox.grid(row=2, column=7, columnspan=5, rowspan=5)
+        self.tardy_listbox.bind("<<ListboxSelect>>", self.on_tardy_select)
+        
         # Populate the listbox with the full roster
         self.populate_listboxes()
 
