@@ -56,17 +56,20 @@ def generate_homework_chart():
             # Make Bubble
             c.circle(starting_bubble_position, starting_height - 35 - (20 * int(num)), 8, stroke=1, fill=0)
             
-            # Make Label only if it's the first entry (only need to make field names once)
+            # Make Label only if it's the first entry student (only need to make field names once)
             if num == 0:
                 c.setFont("Helvetica-Bold", 11)
                 c.drawString(starting_bubble_position - 6, starting_height - 18, days_of_the_week[bubble_num % 5])
+
+                # Make the "Week of ______" only if it is the first iteration of bubble only run this on first student iteration
+                if bubble_num % 5 == 0:
+                    c.drawString(starting_bubble_position - 110, starting_height + 5, "Week of ___________")
             starting_bubble_position += 25
+
+            # Give a little extra space between each group of 5 bubbles
             if bubble_num % 5 == 0:
                 starting_bubble_position += 10
-
-            # Make the Week of ______ only if it is the first iteration of bubble
-            if bubble_num == 1:
-                c.drawString(starting_bubble_position, starting_height, "Week of ___________")
+                    
 
         # Draw the line below the name
         line_y = starting_height - 40 - (20 * int(num))
