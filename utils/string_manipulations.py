@@ -9,7 +9,7 @@ def first_name_last_initial(student_name):
     return f"{first_name } {last_name[0]}."
 
 def format_phone_number(digitString):
-    """formats phones numbers: 818555555"""
+    """formats phones numbers: 818-555-5555"""
     formattedNumer = []
 
     # Only take numbers

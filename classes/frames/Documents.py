@@ -1,5 +1,7 @@
 from utils.pdf_generations.assignment_list import generate_assignment_list
 from utils.pdf_generations.parent_contact import generate_parent_contact
+from utils.pdf_generations.homework_chart import generate_homework_chart
+from utils.pdf_generations.student_demograhics import generate_student_demographics
 from tkinter import ttk
 
 class Documents(ttk.Frame):
@@ -24,7 +26,15 @@ class Documents(ttk.Frame):
         # Download Assignment Checklist
         assignment_checklist = ttk.Button(self, text='Assignment Checklist', command=generate_assignment_list)
         assignment_checklist.grid(column=0, row=1, columnspan=5)
+        
+        # Download Homework Checklist
+        assignment_checklist = ttk.Button(self, text='Homework Chart', command=generate_homework_chart)
+        assignment_checklist.grid(column=0, row=2, columnspan=5, pady=(30, 0))
 
         # Download Parent Contact
         parent_contact = ttk.Button(self, text='Parent Contact', command=generate_parent_contact)
         parent_contact.grid(column=5, row=1, columnspan=5)
+
+        # Download Student Demographics
+        parent_contact = ttk.Button(self, text='Student Demographics', command=generate_student_demographics)
+        parent_contact.grid(column=5, row=2, columnspan=5, pady=(30, 0))

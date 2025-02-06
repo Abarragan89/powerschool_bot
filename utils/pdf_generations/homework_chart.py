@@ -2,7 +2,7 @@ import json
 from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-# from utils.string_manipulations import first_name_last_initial
+from utils.string_manipulations import first_name_last_initial
 
 def first_name_last_initial(student_name):
     last_name, first_name = student_name.split(", ")
@@ -13,15 +13,15 @@ def first_name_last_initial(student_name):
 
 def generate_homework_chart():
     # Open file dialog to let the user choose where to save
-    # file_path = filedialog.asksaveasfilename(
-    #     defaultextension=".pdf",
-    #     filetypes=[("PDF files", "*.pdf")],
-    #     title="Save PDF As",
-    #     initialfile="assignment_checklist.pdf"
-    # )
+    file_path = filedialog.asksaveasfilename(
+        defaultextension=".pdf",
+        filetypes=[("PDF files", "*.pdf")],
+        title="Save PDF As",
+        initialfile="homework_chart.pdf"
+    )
     
-    # if not file_path:  # If user cancels, stop execution
-    #     return
+    if not file_path:  # If user cancels, stop execution
+        return
 
     width, height = letter
     # Swap the height and width values to make it landscape
@@ -31,8 +31,7 @@ def generate_homework_chart():
     right_edge = width - 20
 
     # Create canvas and set constant variables for height
-    c = canvas.Canvas('data/homework_chart.pdf', pagesize=(width, height))
-
+    c = canvas.Canvas(file_path, pagesize=(width, height))
 
     # Add title and set top horizontal line
     c.setFont("Helvetica", 18)
@@ -64,6 +63,8 @@ def generate_homework_chart():
                 # Make the "Week of ______" only if it is the first iteration of bubble only run this on first student iteration
                 if bubble_num % 5 == 0:
                     c.drawString(starting_bubble_position - 110, starting_height + 5, "Week of ___________")
+            
+            # increaseing starting position for next bubble
             starting_bubble_position += 25
 
             # Give a little extra space between each group of 5 bubbles
@@ -103,5 +104,3 @@ def generate_homework_chart():
     # Save the PDF file
     c.showPage() # stop painting page
     c.save() # save file
-
-generate_homework_chart()

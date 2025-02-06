@@ -1,5 +1,4 @@
 from tkinter import ttk
-from tkcalendar import Calendar
 from utils.get_student_demographics import get_student_demographics
 
 

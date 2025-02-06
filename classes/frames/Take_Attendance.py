@@ -32,9 +32,9 @@ class Take_Attendance(ttk.Frame):
         
         # ListBoxes Labels 
         tardy_label = tk.Label(self, text='Tardy', font=('Helvetica', 16), justify="center")
-        tardy_label.grid(row=1, column=0, columnspan=6, pady=(0, 3))
+        tardy_label.grid(row=1, column=7, columnspan=6, pady=(0, 3))
         absent_label = tk.Label(self, text='Absent', font=('Helvetica', 16), justify="center")
-        absent_label.grid(row=1, column=7, columnspan=6, pady=(0, 3))
+        absent_label.grid(row=1, column=0, columnspan=6, pady=(0, 3))
 
         # Absent Listbox
         self.absent_listbox = tk.Listbox(

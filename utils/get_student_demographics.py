@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support.select import Select
 from utils.cryption import load_and_decrypt_credentials
 from utils.safe_find_elements import safe_find_element_value, safe_find_element
 import time
