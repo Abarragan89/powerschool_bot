@@ -31,6 +31,9 @@ def encrypt_and_save_credentials(username, password):
     encrypted_username = f.encrypt(username.encode()).decode()
     encrypted_password = f.encrypt(password.encode()).decode()
 
+    # Ensure the directory exists creates the data directory if doesn't exist
+    os.makedirs(os.path.dirname(CREDENTIALS_FILE), exist_ok=True)
+
     # Save the encrypted credentials to a file
     with open(CREDENTIALS_FILE, "w") as file:
         file.write(f"{encrypted_username}\n{encrypted_password}")
@@ -39,9 +42,6 @@ def load_and_decrypt_credentials():
     """Load encrypted credentials from file and decrypt them."""
     key = get_key()  # Use the same key retrieved from keyring
     f = Fernet(key)
-
-    # Ensure the directory exists creates the data directory if doesn't exist
-    os.makedirs(os.path.dirname(CREDENTIALS_FILE), exist_ok=True)
 
     # Read the encrypted credentials from the file
     with open(CREDENTIALS_FILE, "r") as file:
