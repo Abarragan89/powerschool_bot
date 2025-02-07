@@ -1,5 +1,6 @@
 import keyring
 from cryptography.fernet import Fernet
+import os 
 
 SERVICE_NAME = 'Power_Pal_App'
 KEY_NAME = "fernet_key"
@@ -38,6 +39,9 @@ def load_and_decrypt_credentials():
     """Load encrypted credentials from file and decrypt them."""
     key = get_key()  # Use the same key retrieved from keyring
     f = Fernet(key)
+
+    # Ensure the directory exists creates the data directory if doesn't exist
+    os.makedirs(os.path.dirname(CREDENTIALS_FILE), exist_ok=True)
 
     # Read the encrypted credentials from the file
     with open(CREDENTIALS_FILE, "r") as file:

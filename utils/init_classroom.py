@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from utils.cryption import get_key, encrypt_and_save_credentials
+from utils.cryption import encrypt_and_save_credentials
 
 
 def initialize_create_class(username, password, controller):
