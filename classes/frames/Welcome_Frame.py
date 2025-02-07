@@ -1,5 +1,5 @@
 from tkinter import ttk
-from utils.init_classroom import initialize_create_class
+from utils.get_student_demographics import get_student_demographics
 
 class Welcome_Frame(ttk.Frame):
     def __init__(self, root_app):
@@ -43,6 +43,6 @@ class Welcome_Frame(ttk.Frame):
         initialize_btn = ttk.Button(
             self, 
             text="Initialize", 
-            command=lambda: initialize_create_class(self.username.get(), self.password.get(), root_app)
+            command=lambda: get_student_demographics(self.username.get(), self.password.get(), root_app)
         )
         initialize_btn.grid(column=0, row=4, columnspan=12, pady=(20, 0))

@@ -1,6 +1,7 @@
 import keyring
 from cryptography.fernet import Fernet
 import os 
+import json 
 
 SERVICE_NAME = 'Power_Pal_App'
 KEY_NAME = "fernet_key"

@@ -1,6 +1,13 @@
+import json
+
+
 def get_student_list():
-    with open('data/class_roster.txt') as file:
-        return [student_name.strip() for student_name in file]
+    try:
+        with open('data/class_demo.txt') as file:
+            class_data_json = json.load(file)
+            return [student['name'].strip() for __, student in class_data_json.items()]
+    except:
+        return []
 
 def first_name_last_initial(student_name):
     last_name, first_name = student_name.split(", ")

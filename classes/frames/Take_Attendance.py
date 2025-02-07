@@ -14,11 +14,8 @@ class Take_Attendance(ttk.Frame):
         for col in range(12):
             self.columnconfigure(col, weight=1)
         
-        # Get Array of Student Names
-        try:
-            self.student_roster = get_student_list()
-        except:
-            self.student_roster = []
+        self.student_roster = []
+
         # Tardy Students container
         self.tardy_students = {}
 
@@ -65,17 +62,43 @@ class Take_Attendance(ttk.Frame):
         # Populate the listbox with the full roster
         self.populate_listboxes()
 
+        # refresh Btn(need to save this one to destroy once updating button UI)
+        self.refresh_roster_btn = ttk.Button(self, text='Refresh', command=self.populate_student_roster)
+        
+        # determine which buttons to show
+        self.update_btn_ui()
+
+
         # Back to Dashbord Btn
         back_to_dashboard = ttk.Button(self, text='Back', command=lambda: root_app.show_frame('Dashboard'), width=4)
         back_to_dashboard.grid(row=0, column=0, sticky='wn')
-        
-        # Take Attendance Btn
-        take_attendance_btn = ttk.Button(self, text='Submit Attendance', command=self.submit_attendance)
-        take_attendance_btn.grid(row=2, column=6, sticky='s', rowspan=2)
+    
+    def update_btn_ui(self):
+        # Only show take attendance btn and clear btn if roster is filled with students
+        if self.student_roster:
+            # Take Attendance Btn
+            take_attendance_btn = ttk.Button(self, text='Submit Attendance', command=self.submit_attendance)
+            take_attendance_btn.grid(row=2, column=6, sticky='s', rowspan=2)
 
-        # Clear Btn
-        clear_selection_btn = ttk.Button(self, text='Clear', command=self.clear_selection, width=4)
-        clear_selection_btn.grid(row=3, column=6, rowspan=2, sticky='s')
+            # Clear Btn or Refresh btn for first time
+            clear_selection_btn = ttk.Button(self, text='Clear', command=self.clear_selection, width=4)
+            clear_selection_btn.grid(row=3, column=6, rowspan=2, sticky='s')
+
+            # Remove refresh button
+            self.refresh_roster_btn.destroy()
+        else:
+            self.refresh_roster_btn.grid(row=3, column=6, rowspan=2, sticky='s')
+
+    # Get Array of Student Names
+    def populate_student_roster(self):
+        """Need to call this to update student list before populating"""
+        if len(self.student_roster) < 1:
+            try:
+                self.student_roster = get_student_list()
+            except:
+                self.student_roster = []
+        self.populate_listboxes()
+        self.update_btn_ui()
     
     def populate_listboxes(self):
         for student in self.student_roster:

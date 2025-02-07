@@ -2,14 +2,24 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from utils.cryption import load_and_decrypt_credentials
 from utils.safe_find_elements import safe_find_element_value, safe_find_element
+from utils.cryption import encrypt_and_save_credentials, encrypt_and_save_student_demo, load_and_decrypt_credentials
 import time
-import json
+import json 
 
-def get_student_demographics():
-    # Get user credentials
-    USERNAME, PASSWORD = load_and_decrypt_credentials()
+def get_student_demographics(username='', password='', controller=None):
+    """Save & encrypt credentials and initialize class"""
+    if not username or not password:
+        try:
+            username, password = load_and_decrypt_credentials()
+        except:
+            return
+    
+    if not username or not password:
+        return
+
+    encrypt_and_save_credentials(username, password)
+
     CLASS_DEMOGRAPHICS_JSON = {}
 
     # Keep Chrome Browser open after program finishes
@@ -24,8 +34,8 @@ def get_student_demographics():
     password_field = driver.find_element(By.NAME, value='password')
     submit_btn = driver.find_element(By.ID, value='btnEnter')
 
-    username_field.send_keys(USERNAME)
-    password_field.send_keys(PASSWORD)
+    username_field.send_keys(username)
+    password_field.send_keys(password)
     submit_btn.click()
 
     # Wait for the PowerTeacherPro link to be clickable
@@ -66,7 +76,7 @@ def get_student_demographics():
     is_scraping = True
     # This will be the logic that loops collects data and clicks next arrow
     while is_scraping:
-        time.sleep(2)
+        time.sleep(1)
         # Get the div that the student deomgraphics is located
         student_demo_div = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.ID, 'student-demographics-accordion-group'))
@@ -124,6 +134,12 @@ def get_student_demographics():
         # Click Next Button
         driver.find_element(By.ID, 'studentJumpNext').click()
 
+    encrypt_and_save_student_demo(CLASS_DEMOGRAPHICS_JSON)
+    
     with open('data/class_demo.txt', 'w') as file:
         json.dump(CLASS_DEMOGRAPHICS_JSON, file, indent=4)
+    
+    if controller:
+        controller.show_frame("Dashboard")
+    driver.quit()
 
