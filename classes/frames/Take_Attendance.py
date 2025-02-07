@@ -18,7 +18,7 @@ class Take_Attendance(ttk.Frame):
         try:
             self.student_roster = get_student_list()
         except:
-            pass
+            self.student_roster = []
         # Tardy Students container
         self.tardy_students = {}
 
