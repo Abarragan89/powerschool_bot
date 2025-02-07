@@ -3,7 +3,7 @@ from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from utils.string_manipulations import first_name_last_initial
-
+from utils.open_file_in_preview import open_file_in_preview
 
 def generate_assignment_list():
     # Open file dialog to let the user choose where to save
@@ -63,3 +63,5 @@ def generate_assignment_list():
     # Save the PDF file
     c.showPage()
     c.save()
+
+    open_file_in_preview(file_path)

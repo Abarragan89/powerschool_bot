@@ -3,6 +3,8 @@ from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from utils.string_manipulations import format_phone_number, first_name_last_initial
+from utils.open_file_in_preview import open_file_in_preview
+
 
 def generate_parent_contact():
     """Open file dialog to let the user choose where to save"""
@@ -107,8 +109,22 @@ def generate_parent_contact():
     # Save the PDF file
     c.showPage() # stop painting page
 
+    # List all emails on second page for easy copy and paste
+    c.setFont("Helvetica", 13)
+    c.drawCentredString(width / 2, starting_height, 'All Contact Emails')
+    c.setFont("Helvetica", 10.5)
+    for num, index in enumerate(student_demo_json):
+        c.drawString(100, starting_height - 30 - (15 * int(num)), student_demo_json[index].get('contact_one', {}).get('email') or "")
+        # Contact # 2
+        # check if contact two exists
+        contact_2 = student_demo_json[index].get('contact_two')
 
-    # Draw content on the new page
-    c.drawString(100, 750, "This is the second page")
-
+        # only populate if contact exists
+        if contact_2:
+            c.drawString(400, starting_height - 30 - (15 * int(num)), student_demo_json[index].get('contact_two', {}).get('email') or "")
+    
+    
     c.save() # save file
+
+    open_file_in_preview(file_path)
+

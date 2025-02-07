@@ -1,8 +1,6 @@
 from tkinter import ttk
-from utils.get_student_demographics import get_student_demographics
 
-
-class Dashboard(ttk.Frame):
+class Attendance_Audit(ttk.Frame):
     def __init__(self, root_app):
         # initi the Frame Class 
         super().__init__(padding=10)
@@ -15,14 +13,18 @@ class Dashboard(ttk.Frame):
             self.columnconfigure(col, weight=1)
         
         # Dashboard Title
-        welcome_text = ttk.Label(self, text="Welcome to PowerPal", font=("Helvetica", 22))
+        welcome_text = ttk.Label(self, text="Attendance Audit", font=("Helvetica", 22))
         welcome_text.grid(column=0, row=0, columnspan=12, pady=5)
+
+        # Back to Dashbord Btn
+        back_to_dashboard = ttk.Button(self, text='Back', command=lambda: root_app.show_frame('Dashboard'), width=4)
+        back_to_dashboard.grid(row=0, column=0, sticky='wn')
 
         # Take Attendance Link
         go_to_attendance_btn = ttk.Button(
             self, 
             text="Take Attendance", 
-            command=lambda: root_app.show_frame('Take_Attendance'),
+            command=None,
             width=15
         )
         go_to_attendance_btn.grid(column=0, row=1, columnspan=5, pady=(20, 0))
@@ -31,7 +33,7 @@ class Dashboard(ttk.Frame):
         go_to_documents_btn = ttk.Button(
             self, 
             text="Download Docs", 
-            command=lambda: root_app.show_frame('Documents'),
+            command=None,
             width=15
         )
         go_to_documents_btn.grid(column=6, row=1, columnspan=5, pady=(20, 0))
@@ -40,7 +42,7 @@ class Dashboard(ttk.Frame):
         attendance_audit_btn = ttk.Button(
             self, 
             text="Attendance Audit", 
-            command=lambda: root_app.show_frame('Attendance_Audit'),
+            command=None,
             width=15
         )
         attendance_audit_btn.grid(column=0, row=2, columnspan=5, pady=(30, 0))
@@ -49,7 +51,7 @@ class Dashboard(ttk.Frame):
         update_student_demographics = ttk.Button(
             self, 
             text="Update Students", 
-            command=get_student_demographics,
+            command=None,
             width=15
         )
         update_student_demographics.grid(column=6, row=2, columnspan=5, pady=(30,0))

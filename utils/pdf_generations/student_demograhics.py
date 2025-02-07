@@ -4,6 +4,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from utils.string_manipulations import format_phone_number, first_name_last_initial
 from utils.calculate_age import calculate_age
+from utils.open_file_in_preview import open_file_in_preview
 
 def generate_student_demographics():
     """Open file dialog to let the user choose where to save"""
@@ -85,3 +86,5 @@ def generate_student_demographics():
     # Save the PDF file
     c.showPage() # stop painting page
     c.save() # save file
+
+    open_file_in_preview(file_path)

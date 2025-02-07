@@ -3,6 +3,8 @@ from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from utils.string_manipulations import first_name_last_initial
+from utils.open_file_in_preview import open_file_in_preview
+
 
 def first_name_last_initial(student_name):
     last_name, first_name = student_name.split(", ")
@@ -104,3 +106,5 @@ def generate_homework_chart():
     # Save the PDF file
     c.showPage() # stop painting page
     c.save() # save file
+
+    open_file_in_preview(file_path)

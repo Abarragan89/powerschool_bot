@@ -58,9 +58,6 @@ class Take_Attendance(ttk.Frame):
         )
         self.tardy_listbox.grid(row=2, column=7, columnspan=5, rowspan=5)
         self.tardy_listbox.bind("<<ListboxSelect>>", self.on_tardy_select)
-        
-        # Populate the listbox with the full roster
-        self.populate_listboxes()
 
         # refresh Btn(need to save this one to destroy once updating button UI)
         self.refresh_roster_btn = ttk.Button(self, text='Refresh', command=self.populate_student_roster)
@@ -72,6 +69,12 @@ class Take_Attendance(ttk.Frame):
         # Back to Dashbord Btn
         back_to_dashboard = ttk.Button(self, text='Back', command=lambda: root_app.show_frame('Dashboard'), width=4)
         back_to_dashboard.grid(row=0, column=0, sticky='wn')
+
+        # populate roster array with .txt data
+        self.populate_student_roster()
+
+        # Populate the listbox with the full roster
+        self.populate_listboxes()
     
     def update_btn_ui(self):
         # Only show take attendance btn and clear btn if roster is filled with students
@@ -92,7 +95,7 @@ class Take_Attendance(ttk.Frame):
     # Get Array of Student Names
     def populate_student_roster(self):
         """Need to call this to update student list before populating"""
-        if len(self.student_roster) < 1:
+        if not self.student_roster:
             try:
                 self.student_roster = get_student_list()
             except:
