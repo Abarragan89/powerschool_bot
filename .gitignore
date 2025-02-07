@@ -11,3 +11,7 @@ __pycache__/
 # Optional: Ignore environment variable files (if you have one)
 .env
 
+# Production builds
+PowerPal.spec
+build/
+dist/

@@ -15,8 +15,10 @@ class Take_Attendance(ttk.Frame):
             self.columnconfigure(col, weight=1)
         
         # Get Array of Student Names
-        self.student_roster = get_student_list()
-
+        try:
+            self.student_roster = get_student_list()
+        except:
+            pass
         # Tardy Students container
         self.tardy_students = {}
 
