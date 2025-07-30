@@ -37,13 +37,13 @@ class Dashboard(ttk.Frame):
         go_to_documents_btn.grid(column=6, row=1, columnspan=5, pady=(20, 0))
 
         # Attendance audit Link
-        attendance_audit_btn = ttk.Button(
-            self, 
-            text="Attendance Audit", 
-            command=lambda: root_app.show_frame('Attendance_Audit'),
-            width=15
-        )
-        attendance_audit_btn.grid(column=0, row=2, columnspan=5, pady=(30, 0))
+        # attendance_audit_btn = ttk.Button(
+        #     self, 
+        #     text="Attendance Audit", 
+        #     command=lambda: root_app.show_frame('Attendance_Audit'),
+        #     width=15
+        # )
+        # attendance_audit_btn.grid(column=0, row=2, columnspan=5, pady=(30, 0))
 
         # Update Student Demographics
         update_student_demographics = ttk.Button(
@@ -52,4 +52,4 @@ class Dashboard(ttk.Frame):
             command=get_student_demographics,
             width=15
         )
-        update_student_demographics.grid(column=6, row=2, columnspan=5, pady=(30,0))
+        update_student_demographics.grid(column=0, row=2, columnspan=12, pady=(30,0))

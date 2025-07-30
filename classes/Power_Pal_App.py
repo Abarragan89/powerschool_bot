@@ -24,8 +24,6 @@ class Power_Pal_App(Tk):
             frame.grid(row=0, column=0, sticky="nsew")
             for col in range(12):
                 frame.columnconfigure(col, weight=1)
-        
-
         self.choose_opening_frame()
         
     def show_frame(self, frame_name):
@@ -37,6 +35,7 @@ class Power_Pal_App(Tk):
         """Check crendentials.txt see if present to load welcome or dashboard"""
         try:
             with open('data/credentials.txt') as file:
+                # Read contents of file to determien if dashboard or welcome frame
                 file_lines = file.readlines()
                 if len(file_lines) == 2:
                     self.show_frame('Dashboard')
