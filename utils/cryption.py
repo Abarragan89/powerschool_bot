@@ -1,11 +1,11 @@
 import keyring
 from cryptography.fernet import Fernet
-import os 
-import json 
+import os
+from utils.get_data_file import get_data_file 
 
 SERVICE_NAME = 'Power_Pal_App'
 KEY_NAME = "fernet_key"
-CREDENTIALS_FILE = "data/credentials.txt"
+CREDENTIALS_FILE = get_data_file("data/credentials.txt")
 
 def get_key():
     """Retrieve or generate the encryption key from keyring."""

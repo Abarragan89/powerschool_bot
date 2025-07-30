@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from utils import get_data_file
 from utils.safe_find_elements import safe_find_element_value, safe_find_element
 from utils.cryption import encrypt_and_save_credentials, load_and_decrypt_credentials
 import time
@@ -134,7 +135,7 @@ def get_student_demographics(username='', password='', controller=None):
         # Click Next Button
         driver.find_element(By.ID, 'studentJumpNext').click()
     
-    with open('data/class_demo.txt', 'w') as file:
+    with open(get_data_file('data/class_demo.txt'), 'w') as file:
         json.dump(CLASS_DEMOGRAPHICS_JSON, file, indent=4)
     
     if controller:

@@ -2,6 +2,7 @@ import json
 from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from utils import get_data_file
 from utils.string_manipulations import format_phone_number, first_name_last_initial
 from utils.open_file_in_preview import open_file_in_preview
 
@@ -49,7 +50,7 @@ def generate_parent_contact():
 
 
     # Get Student Data
-    with open('data/class_demo.txt', 'r') as file:
+    with open(get_data_file('data/class_demo.txt'), 'r') as file:
         content = file.read()
         student_demo_json = json.loads(content)
 

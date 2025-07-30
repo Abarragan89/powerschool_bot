@@ -2,6 +2,7 @@ import json
 from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from utils.get_data_file import get_data_file
 from utils.string_manipulations import first_name_last_initial
 from utils.open_file_in_preview import open_file_in_preview
 
@@ -40,7 +41,7 @@ def generate_homework_chart():
     c.drawCentredString(width / 2.0, height - 28, "Homework Chart")
 
     # Get Student Data
-    with open('data/class_demo.txt', 'r') as file:
+    with open(get_data_file('data/class_demo.txt'), 'r') as file:
         content = file.read()
         student_demo_json = json.loads(content)
 

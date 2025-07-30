@@ -1,9 +1,11 @@
 import json
 
+from utils.get_data_file import get_data_file
+
 
 def get_student_list():
     try:
-        with open('data/class_demo.txt') as file:
+        with open(get_data_file('data/class_demo.txt')) as file:
             class_data_json = json.load(file)
             return [student['name'].strip() for __, student in class_data_json.items()]
     except:

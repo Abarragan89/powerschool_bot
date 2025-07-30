@@ -4,6 +4,7 @@ from classes.frames.Dashboard import Dashboard
 from classes.frames.Take_Attendance import Take_Attendance
 from classes.frames.Attendance_Audit import Attendance_Audit
 from classes.frames.Documents import Documents
+from utils.get_data_file import get_data_file
 
 class Power_Pal_App(Tk):
     def __init__(self):
@@ -34,7 +35,7 @@ class Power_Pal_App(Tk):
     def choose_opening_frame(self):
         """Check crendentials.txt see if present to load welcome or dashboard"""
         try:
-            with open('data/credentials.txt') as file:
+            with open(get_data_file('data/credentials.txt')) as file:
                 # Read contents of file to determien if dashboard or welcome frame
                 file_lines = file.readlines()
                 if len(file_lines) == 2:
