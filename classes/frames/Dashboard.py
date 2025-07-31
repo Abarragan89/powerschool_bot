@@ -45,6 +45,15 @@ class Dashboard(ttk.Frame):
         # )
         # attendance_audit_btn.grid(column=0, row=2, columnspan=5, pady=(30, 0))
 
+        # Update Credentials
+        update_credentials_btn = ttk.Button(
+            self, 
+            text="Update Credentials", 
+            command=lambda: root_app.show_frame('Update_Credentials'),
+            width=15
+        )
+        update_credentials_btn.grid(column=0, row=2, columnspan=5, pady=(30, 0))
+
         # Update Student Demographics
         update_student_demographics = ttk.Button(
             self, 
@@ -52,4 +61,4 @@ class Dashboard(ttk.Frame):
             command=get_student_demographics,
             width=15
         )
-        update_student_demographics.grid(column=0, row=2, columnspan=12, pady=(30,0))
+        update_student_demographics.grid(column=5, row=2, columnspan=12, pady=(30,0))

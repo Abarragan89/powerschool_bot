@@ -3,6 +3,7 @@ from classes.frames.Welcome_Frame import Welcome_Frame
 from classes.frames.Dashboard import Dashboard
 from classes.frames.Take_Attendance import Take_Attendance
 from classes.frames.Attendance_Audit import Attendance_Audit
+from classes.frames.Update_Credentials import Update_Credentials
 from classes.frames.Documents import Documents
 from utils.get_data_file import get_data_file
 
@@ -18,7 +19,7 @@ class Power_Pal_App(Tk):
         # Dictionary to hold frame instances
         self.frames = {}
 
-        for F in (Welcome_Frame, Dashboard, Take_Attendance, Documents, Attendance_Audit):
+        for F in (Welcome_Frame, Dashboard, Take_Attendance, Documents, Attendance_Audit, Update_Credentials):
             # Get name of class
             frame = F(self)  # `self` is PowerPalApp
             self.frames[F.__name__] = frame
