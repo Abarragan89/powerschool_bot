@@ -2,7 +2,7 @@ import json
 from tkinter import filedialog
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from utils import get_data_file
+from utils.get_data_file import get_data_file
 from utils.string_manipulations import first_name_last_initial
 from utils.open_file_in_preview import open_file_in_preview
 
