@@ -9,6 +9,7 @@ def handle_update_credentials(username, password, self):
         error_label = ttk.Label(self, text="Username and Password cannot be empty.", foreground="red")
         error_label.grid(column=0, row=5, columnspan=12, pady=(10, 0))
         return
+    
     # wrape the encryption in try block to catch any errors
     try:
         # Encrypt and save the credentials
