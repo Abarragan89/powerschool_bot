@@ -58,19 +58,37 @@ def generate_parent_contact():
     # Loop through students to add name and bottom line (top line only if it is first student)
     c.setFont("Helvetica", 10.5)
     for num, index in enumerate(student_demo_json):
-        c.drawString(23, starting_height - 60 - (20 * int(num)), first_name_last_initial(student_demo_json[index]['name']))
-        c.drawString(110, starting_height - 60 - (20 * int(num)), student_demo_json[index].get('contact_one', {}).get('name').split(',')[1] or "") 
-        c.drawString(182, starting_height - 60 - (20 * int(num)), format_phone_number(student_demo_json[index].get('contact_one', {}).get('phone')) or "")
-        c.drawString(255, starting_height - 60 - (20 * int(num)), student_demo_json[index].get('contact_one', {}).get('email') or "")
+        # Student name
+        student_name = student_demo_json[index].get('name', 'Unknown Student')
+        c.drawString(23, starting_height - 60 - (20 * int(num)), first_name_last_initial(student_name))
+        
+        # Contact One information
+        contact_one = student_demo_json[index].get('contact_one', {})
+        contact_one_name = contact_one.get('name', '')
+        if contact_one_name and ',' in contact_one_name:
+            contact_one_first = contact_one_name.split(',')[1].strip()
+        else:
+            contact_one_first = contact_one_name
+        
+        c.drawString(110, starting_height - 60 - (20 * int(num)), contact_one_first)
+        c.drawString(182, starting_height - 60 - (20 * int(num)), format_phone_number(contact_one.get('phone', '')) if contact_one.get('phone') else "")
+        c.drawString(255, starting_height - 60 - (20 * int(num)), contact_one.get('email', '') or "")
+        
         # Contact # 2
         # check if contact two exists
         contact_2 = student_demo_json[index].get('contact_two')
 
         # only populate if contact exists
         if contact_2:
-            c.drawString(440, starting_height - 60 - (20 * int(num)), student_demo_json[index].get('contact_two', {}).get('name', "").split(',')[1] or "") 
-            c.drawString(512, starting_height - 60 - (20 * int(num)), format_phone_number(student_demo_json[index].get('contact_two', {}).get('phone')) or "")
-            c.drawString(585, starting_height - 60 - (20 * int(num)), student_demo_json[index].get('contact_two', {}).get('email') or "")
+            contact_two_name = contact_2.get('name', '')
+            if contact_two_name and ',' in contact_two_name:
+                contact_two_first = contact_two_name.split(',')[1].strip()
+            else:
+                contact_two_first = contact_two_name
+                
+            c.drawString(440, starting_height - 60 - (20 * int(num)), contact_two_first)
+            c.drawString(512, starting_height - 60 - (20 * int(num)), format_phone_number(contact_2.get('phone', '')) if contact_2.get('phone') else "")
+            c.drawString(585, starting_height - 60 - (20 * int(num)), contact_2.get('email', '') or "")
         
         # Draw the line below the name
         line_y = starting_height - 60 - (20 * int(num))
@@ -115,14 +133,18 @@ def generate_parent_contact():
     c.drawCentredString(width / 2, starting_height, 'All Contact Emails')
     c.setFont("Helvetica", 10.5)
     for num, index in enumerate(student_demo_json):
-        c.drawString(100, starting_height - 30 - (15 * int(num)), student_demo_json[index].get('contact_one', {}).get('email') or "")
+        contact_one = student_demo_json[index].get('contact_one', {})
+        contact_one_email = contact_one.get('email', '') or ""
+        c.drawString(100, starting_height - 30 - (15 * int(num)), contact_one_email)
+        
         # Contact # 2
         # check if contact two exists
         contact_2 = student_demo_json[index].get('contact_two')
 
         # only populate if contact exists
         if contact_2:
-            c.drawString(400, starting_height - 30 - (15 * int(num)), student_demo_json[index].get('contact_two', {}).get('email') or "")
+            contact_two_email = contact_2.get('email', '') or ""
+            c.drawString(400, starting_height - 30 - (15 * int(num)), contact_two_email)
     
     
     c.save() # save file
