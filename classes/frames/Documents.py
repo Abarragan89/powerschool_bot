@@ -1,6 +1,8 @@
 from utils.pdf_generations.assignment_list import generate_assignment_list
 from utils.pdf_generations.parent_contact import generate_parent_contact
 from utils.pdf_generations.homework_chart import generate_homework_chart
+from utils.pdf_generations.birthdays_calendar import generate_birthdays_calendar
+from utils.pdf_generations.address_labels import generate_address_labels
 from utils.pdf_generations.student_demograhics import generate_student_demographics
 from tkinter import ttk
 
@@ -36,5 +38,13 @@ class Documents(ttk.Frame):
         parent_contact.grid(column=6, row=1, columnspan=5)
 
         # Download Student Demographics
-        parent_contact = ttk.Button(self, text='Student Demographics', command=generate_student_demographics, width=15)
-        parent_contact.grid(column=6, row=2, columnspan=5, pady=(30, 0))
+        student_demographics = ttk.Button(self, text='Student Demographics', command=generate_student_demographics, width=15)
+        student_demographics.grid(column=6, row=2, columnspan=5, pady=(30, 0))
+
+        # Download Birthdays Calendar
+        birthdays_calendar = ttk.Button(self, text='Birthday Calendar', command=generate_birthdays_calendar, width=15)
+        birthdays_calendar.grid(column=0, row=3, columnspan=5, pady=(30, 0))
+
+        # Download Address Labels
+        address_labels = ttk.Button(self, text='Address Labels', command=generate_address_labels, width=15)
+        address_labels.grid(column=6, row=3, columnspan=5, pady=(30, 0))
